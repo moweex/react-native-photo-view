@@ -413,7 +413,7 @@
     _maxZoomScale = 5.0;
 
     // Setup
-    self.backgroundColor = [UIColor = whiteColor];
+    self.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.showsVerticalScrollIndicator = YES;
