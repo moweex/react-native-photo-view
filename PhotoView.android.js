@@ -6,6 +6,13 @@ import ViewPropTypes from 'react-native/Libraries/Components/View/ViewPropTypes'
 const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
 export default class PhotoView extends Component {
+	
+	setNativeProps(nativeProps) {
+		this._root.setNativeProps(nativeProps);
+	}
+
+	setScale = (scale) => this.setNativeProps({ scale });
+
     static propTypes = {
         source: PropTypes.oneOfType([
             PropTypes.shape({
@@ -24,7 +31,7 @@ export default class PhotoView extends Component {
         fadeDuration: PropTypes.number,
         minimumZoomScale: PropTypes.number,
         maximumZoomScale: PropTypes.number,
-        scale: PropTypes.number,
+		scale: PropTypes.number,
         androidZoomTransitionDuration: PropTypes.number,
         androidScaleType: PropTypes.oneOf(["center", "centerCrop", "centerInside", "fitCenter", "fitStart", "fitEnd", "fitXY", "matrix"]),
         onLoadStart: PropTypes.func,
@@ -36,7 +43,11 @@ export default class PhotoView extends Component {
         onScale: PropTypes.func,
         ...ViewPropTypes
     };
-
+	
+	_assignRoot = (component) => {
+		this._root = component;
+	};
+	
     render() {
         const source = resolveAssetSource(this.props.source);
         var loadingIndicatorSource = resolveAssetSource(this.props.loadingIndicatorSource);
@@ -66,7 +77,10 @@ export default class PhotoView extends Component {
                 loadingIndicatorSrc: loadingIndicatorSource ? loadingIndicatorSource.uri : null,
             };
 
-            return <PhotoViewAndroid {...nativeProps} />
+			return <PhotoViewAndroid 
+				ref={this._assignRoot}
+				{...nativeProps}
+			/>
         }
         return null
     }
