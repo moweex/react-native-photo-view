@@ -6,6 +6,13 @@ import ViewPropTypes from 'react-native/Libraries/Components/View/ViewPropTypes'
 const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
 export default class PhotoView extends Component {
+
+	setNativeProps(nativeProps) {
+		this._root.setNativeProps(nativeProps);
+	}
+
+	setScale = (scale) => this.setNativeProps({ scale });
+	
     static propTypes = {
         source: PropTypes.oneOfType([
             PropTypes.shape({
@@ -35,7 +42,11 @@ export default class PhotoView extends Component {
         showsHorizontalScrollIndicator: PropTypes.bool,
         showsVerticalScrollIndicator: PropTypes.bool,
         ...ViewPropTypes
-    };
+	};
+	
+	_assignRoot = (component) => {
+		this._root = component;
+	};
 
     render() {
         const source = resolveAssetSource(this.props.source);
@@ -66,7 +77,10 @@ export default class PhotoView extends Component {
                 loadingIndicatorSrc: loadingIndicatorSource ? loadingIndicatorSource.uri : null,
             };
 
-            return <RNPhotoView {...nativeProps} />
+			return <RNPhotoView 
+				ref={this._assignRoot}
+				{...nativeProps}
+			/>
         }
         return null
     }
