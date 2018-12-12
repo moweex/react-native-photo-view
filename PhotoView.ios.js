@@ -11,6 +11,7 @@ export default class PhotoView extends Component {
 		this._root.setNativeProps(nativeProps);
 	}
 	setScale = (scale) => {
+        console.log('this: ', this);
 		this.setNativeProps({ scale });
 	}
     static propTypes = {
