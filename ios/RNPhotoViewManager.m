@@ -14,12 +14,10 @@ RCT_EXPORT_VIEW_PROPERTY(loadingIndicatorSrc, NSString)
 
 RCT_REMAP_VIEW_PROPERTY(maximumZoomScale, maxZoomScale, CGFloat)
 RCT_REMAP_VIEW_PROPERTY(minimumZoomScale, minZoomScale, CGFloat)
-RCT_EXPORT_METHOD(setScale) {
-    [RNPhotoView setScale];
-}
+RCT_REMAP_VIEW_PROPERTY(IOSScale,scale , CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(showsHorizontalScrollIndicator, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(showsVerticalScrollIndicator, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(scale , NSInteger)
+
 RCT_EXPORT_VIEW_PROPERTY(onPhotoViewerError, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onPhotoViewerScale, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onPhotoViewerViewTap, RCTBubblingEventBlock)

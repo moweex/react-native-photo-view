@@ -11,8 +11,7 @@ export default class PhotoView extends Component {
 		this._root.setNativeProps(nativeProps);
 	}
 	setScale = (scale) => {
-        console.log('this: ', this);
-		this.setNativeProps({ scale });
+		this.setNativeProps({ IOSScale:scale });
 	}
     static propTypes = {
         source: PropTypes.oneOfType([
@@ -35,6 +34,7 @@ export default class PhotoView extends Component {
         scale: PropTypes.number,
         onLoadStart: PropTypes.func,
         onLoad: PropTypes.func,
+        IOSScale:PropTypes.number,
         onLoadEnd: PropTypes.func,
         onProgress: PropTypes.func,
         onTap: PropTypes.func,
