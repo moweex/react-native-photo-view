@@ -147,7 +147,7 @@ public class PhotoView extends PhotoDraweeView {
 
         GenericDraweeHierarchy hierarchy = getHierarchy();
         if (mLoadingImageDrawable != null) {
-            hierarchy.setPlaceholderImage(mLoadingImageDrawable, ScalingUtils.ScaleType.CENTER);
+            hierarchy.setPlaceholderImage(mLoadingImageDrawable, ScalingUtils.ScaleType.FIT_CENTER);
         }
         hierarchy.setFadeDuration(
                 mFadeDurationMs >= 0
@@ -155,7 +155,7 @@ public class PhotoView extends PhotoDraweeView {
                         : mIsLocalImage ? 0 : REMOTE_IMAGE_FADE_DURATION_MS);
 
         ImageRequestBuilder imageRequestBuilder = ImageRequestBuilder.newBuilderWithSource(mUri)
-                .setAutoRotateEnabled(true).setResizeOptions(new ResizeOptions(getMaxTextureSize(), getMaxTextureSize()));
+                .setAutoRotateEnabled(true);
 
         ImageRequest imageRequest = ReactNetworkImageRequest
                 .fromBuilderWithHeaders(imageRequestBuilder, mHeaders);
