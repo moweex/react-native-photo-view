@@ -7,9 +7,14 @@ const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSou
 
 export default class PhotoView extends Component {
 	
-	setNativeProps(nativeProps) {
-		this._root.setNativeProps(nativeProps);
-	}
+    setNativeProps(nativeProps) {
+        if (this._root) {
+          console.log("this._root.setNativeProps(nativeProps); YES", this._root);
+          this._root.setNativeProps(nativeProps);
+        } else {
+          console.log("this._root.setNativeProps(nativeProps); NO", this._root);
+        }  
+    }
 
 	setScale = (scale) => {
 		this.setNativeProps({ scale });
