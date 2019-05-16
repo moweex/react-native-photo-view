@@ -16,6 +16,9 @@
 @property (nonatomic, strong) MWTapDetectingView *tapView;
 @property (nonatomic, strong) UIImageView *loadingImageView;
 
+@property (nonatomic, assign) CGFloat customWidth;
+@property (nonatomic, assign) CGFloat customHeight;
+
 #pragma mark - Data
 
 @property (nonatomic, strong) UIImage *image;
@@ -401,10 +404,31 @@
     }
 }
 
-- (void)setScale:(CGFloat)scale {
-    _scale = scale;
-    [self setZoomScale:_scale];
-    self.zoomScale = _scale;
+- (void)screenDidRoate {
+    if(self.customHeight != 0 && self.customWidth != 0) {
+        CGSize boundsSize = CGSizeMake(self.customWidth, self.customHeight);
+        CGSize imageSize = _photoImageView.image.size;
+        
+        // Calculate Min
+        CGFloat xScale = boundsSize.width / imageSize.width;    // the scale needed to perfectly fit the image width-wise
+        CGFloat yScale = boundsSize.height / imageSize.height;  // the scale needed to perfectly fit the image height-wise
+        CGFloat minScale = MIN(xScale, yScale);
+        self.minimumZoomScale = minScale;
+        self.zoomScale = minScale;
+        
+        self.customHeight = 0;
+        self.customWidth = 0;
+    }
+}
+
+- (void)setLayoutHeight:(CGFloat)height {
+    self.customHeight = height;
+    [self screenDidRoate];
+}
+
+- (void)setLayoutWidth:(CGFloat)width {
+    self.customWidth = width;
+    [self screenDidRoate];
 }
 
 #pragma mark - Private
@@ -412,6 +436,9 @@
 - (void)initView {
     _minZoomScale = 1.0;
     _maxZoomScale = 5.0;
+    
+    self.customHeight = 0;
+    self.customWidth = 0;
 
     // Setup
     self.backgroundColor = [UIColor whiteColor];
@@ -432,6 +459,7 @@
     _photoImageView.backgroundColor = [UIColor whiteColor];
     _photoImageView.contentMode = UIViewContentModeCenter;
     _photoImageView.tapDelegate = self;
+    _photoImageView.backgroundColor = [UIColor redColor];
     [self addSubview:_photoImageView];
 }
 

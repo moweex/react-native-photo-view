@@ -15,6 +15,9 @@ RCT_EXPORT_VIEW_PROPERTY(loadingIndicatorSrc, NSString)
 RCT_REMAP_VIEW_PROPERTY(maximumZoomScale, maxZoomScale, CGFloat)
 RCT_REMAP_VIEW_PROPERTY(minimumZoomScale, minZoomScale, CGFloat)
 RCT_REMAP_VIEW_PROPERTY(IOSScale,scale , CGFloat)
+RCT_REMAP_VIEW_PROPERTY(layoutWidth,layoutWidth , CGFloat)
+RCT_REMAP_VIEW_PROPERTY(layoutHeight,layoutHeight , CGFloat)
+
 RCT_EXPORT_VIEW_PROPERTY(showsHorizontalScrollIndicator, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(showsVerticalScrollIndicator, BOOL)
 

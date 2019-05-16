@@ -16,9 +16,12 @@ export default class PhotoView extends Component {
         }
     }
     
-	setScale = (scale) => {
-		this.setNativeProps({ IOSScale:scale });
-	}
+	setScale = (layoutWidth, layoutHeight) => {
+        this.setNativeProps({ layoutHeight });
+        this.setNativeProps({ layoutWidth });
+        // this.setNativeProps({ minimumZoomScale: scale });
+    };
+    
     static propTypes = {
         source: PropTypes.oneOfType([
             PropTypes.shape({
